@@ -1,0 +1,40 @@
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        counter = set()
+        
+#         let N be the number of emails
+        for email in emails:
+            #         search before + after @
+            email_split = email.split('@')
+#             let M be the number of characters in element
+            local_name, domain_name = email_split
+            
+            strBuilder = ""
+            for char in local_name:
+                if char == ".":
+                    next
+                else:
+                    strBuilder = strBuilder + char
+                    
+            leftStr = ""
+            rightStr = ""
+            for char in local_name:
+                if char == '+':
+                    flag = True
+                    next
+                    
+                if flag == False:
+                    leftStr = leftStr + char    
+                else:
+                    rightStr = rightStr + char
+                    
+            
+            # transLocalName = local_name.replace('.', '')
+            
+            beforePlusSign = transLocalName.split('+')[0]
+            
+            revisedEmail = beforePlusSign + '@' + domain_name
+            
+            counter.add(revisedEmail)
+                
+        return len(counter)
